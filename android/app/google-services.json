@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "878978476421",
+    "project_id": "hary-mood-tracker-final",
+    "storage_bucket": "hary-mood-tracker-final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878978476421:android:da6d266927b9984aea7cec",
+        "android_client_info": {
+          "package_name": "com.example.final_project_tiktok_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvtHfMTsljwc0fagjtThap-qunh9o17Es"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

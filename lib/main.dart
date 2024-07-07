@@ -1,42 +1,111 @@
+import 'package:final_project_tiktok_clone/features/settings/repos/darkmode_config_repo.dart';
+import 'package:final_project_tiktok_clone/features/settings/view_models/darkmode_config_vm.dart';
+import 'package:final_project_tiktok_clone/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const HaryFinalProject());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  final preferences = await SharedPreferences.getInstance();
+  final repository = DarkmodeConfigRepository(preferences);
+
+  runApp(
+    ProviderScope(
+      overrides: [
+        darkModeConfigProvider.overrideWith(
+          () => DarkmodeConfigViewModel(
+            repository,
+          ),
+        ),
+      ],
+      child: const HaryFinalProject(),
+    ),
+  );
 }
 
-class HaryFinalProject extends StatefulWidget {
+class HaryFinalProject extends ConsumerStatefulWidget {
   const HaryFinalProject({super.key});
 
   @override
-  State<HaryFinalProject> createState() => _HaryFinalProjectState();
+  ConsumerState<HaryFinalProject> createState() => _HaryFinalProjectState();
 }
 
-class _HaryFinalProjectState extends State<HaryFinalProject> {
+class _HaryFinalProjectState extends ConsumerState<HaryFinalProject> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: ref.watch(routerProvider),
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      themeMode: ref.watch(darkModeConfigProvider).isDarkMode
+          ? ThemeMode.dark
+          : ThemeMode.light,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        brightness: Brightness.light,
+        splashColor: Colors.transparent,
+        scaffoldBackgroundColor: Colors.white,
+        bottomAppBarTheme: const BottomAppBarTheme(
+          color: Colors.white,
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            foregroundColor: WidgetStateProperty.all(Colors.black),
+            backgroundColor: WidgetStateProperty.all(Colors.transparent),
+          ),
+        ),
+        primaryColor: const Color(0xff4E98E9),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color(0xff4E98E9),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          elevation: 0,
+        ),
+        tabBarTheme: const TabBarTheme(
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.black,
+          indicatorColor: Colors.black,
+          dividerColor: Colors.white,
+        ),
       ),
-      home: const Scaffold(),
+      darkTheme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
+        primaryColor: const Color(0xff4E98E9),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color(0xff4E98E9),
+        ),
+        brightness: Brightness.dark,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          elevation: 0,
+        ),
+        bottomAppBarTheme: const BottomAppBarTheme(
+          color: Colors.black,
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            foregroundColor: WidgetStateProperty.all(Colors.white),
+            backgroundColor: WidgetStateProperty.all(Colors.transparent),
+          ),
+        ),
+        tabBarTheme: TabBarTheme(
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.grey,
+          indicatorColor: Colors.grey.shade700,
+          dividerColor: Colors.black,
+        ),
+      ),
     );
   }
 }
