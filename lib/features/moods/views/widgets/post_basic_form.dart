@@ -1,8 +1,9 @@
+import 'package:animated_emoji/animated_emoji.dart';
 import 'package:final_project_tiktok_clone/features/moods/models/mood_model.dart';
 import 'package:final_project_tiktok_clone/features/settings/view_models/darkmode_config_vm.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
@@ -42,43 +43,11 @@ class PostBasicFormState extends ConsumerState<PostBasicForm> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
+                      const Column(
                         children: [
-                          Stack(
-                            children: [
-                              const CircleAvatar(
-                                backgroundColor: null,
-                                radius: 20,
-                              ),
-                              Positioned(
-                                right: 0,
-                                bottom: 0,
-                                child: CircleAvatar(
-                                  backgroundColor: ref
-                                          .watch(darkModeConfigProvider)
-                                          .isDarkMode
-                                      ? Colors.black
-                                      : Colors.white,
-                                  radius: 9,
-                                  child: const Icon(
-                                    FontAwesomeIcons.circlePlus,
-                                    size: 15,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Gap(5),
-                          Expanded(
-                            child: SizedBox(
-                              width: 1,
-                              child: ColoredBox(
-                                color:
-                                    ref.watch(darkModeConfigProvider).isDarkMode
-                                        ? Colors.grey.shade700
-                                        : Colors.grey.shade300,
-                              ),
-                            ),
+                          AnimatedEmoji(
+                            AnimatedEmojis.fireHeart,
+                            size: 50,
                           ),
                         ],
                       ),
@@ -91,22 +60,10 @@ class PostBasicFormState extends ConsumerState<PostBasicForm> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        widget.mood.mood,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleLarge,
-                                      ),
-                                      const Gap(10),
-                                      SvgPicture.asset(
-                                        alignment: Alignment.bottomCenter,
-                                        "assets/images/Twitter_Verified_Badge.svg",
-                                        width: 20,
-                                      ),
-                                    ],
+                                  Text(
+                                    widget.mood.mood,
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
                                   ),
                                   const Spacer(),
                                   Row(
@@ -119,23 +76,6 @@ class PostBasicFormState extends ConsumerState<PostBasicForm> {
                                             .copyWith(
                                               color: Colors.grey.shade500,
                                             ),
-                                      ),
-                                      const Gap(10),
-                                      GestureDetector(
-                                        // onTap: _onThreadTap,
-                                        child: SvgPicture.asset(
-                                          "assets/images/three-dots-svgrepo-com.svg",
-                                          width: 20,
-                                          colorFilter: ColorFilter.mode(
-                                            ref
-                                                    .watch(
-                                                        darkModeConfigProvider)
-                                                    .isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
-                                            BlendMode.srcIn,
-                                          ),
-                                        ),
                                       ),
                                     ],
                                   ),
@@ -168,30 +108,6 @@ class PostBasicFormState extends ConsumerState<PostBasicForm> {
                               //       ),
                               //     ),
                               //   ),
-                              const Gap(5),
-                              const Row(
-                                children: [
-                                  Icon(
-                                    FontAwesomeIcons.heart,
-                                    size: 20,
-                                  ),
-                                  Gap(10),
-                                  Icon(
-                                    FontAwesomeIcons.comment,
-                                    size: 20,
-                                  ),
-                                  Gap(10),
-                                  Icon(
-                                    FontAwesomeIcons.repeat,
-                                    size: 20,
-                                  ),
-                                  Gap(10),
-                                  Icon(
-                                    FontAwesomeIcons.paperPlane,
-                                    size: 20,
-                                  ),
-                                ],
-                              ),
                             ],
                           ),
                         ),
@@ -199,12 +115,9 @@ class PostBasicFormState extends ConsumerState<PostBasicForm> {
                     ],
                   ),
                 ),
-                const Gap(8),
               ],
             ),
           ),
-          const Gap(10),
-          const Divider(),
         ],
       ),
     );

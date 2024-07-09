@@ -2,7 +2,6 @@ import 'package:final_project_tiktok_clone/features/moods/view_model/mood_view_m
 import 'package:final_project_tiktok_clone/features/moods/views/widgets/post_basic_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class PostScreen extends ConsumerStatefulWidget {
@@ -33,7 +32,12 @@ class PostScreenState extends ConsumerState<PostScreen> {
               child: Column(
                 children: [
                   const Gap(20),
-                  const Center(child: Text("Mood")),
+                  Center(
+                    child: Text(
+                      "Mood",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
                   const Gap(20),
                   ListView.builder(
                     shrinkWrap: true,

@@ -100,6 +100,7 @@ class CreateAccountPageState extends ConsumerState<CreateAccountPage> {
     return GestureDetector(
       onTap: _onScaffoldTap,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
