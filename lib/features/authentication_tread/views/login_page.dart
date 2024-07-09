@@ -47,9 +47,9 @@ class LogInPageState extends ConsumerState<LogInPage> {
     super.dispose();
   }
 
-  // void _onScaffoldTap() {
-  //   FocusScope.of(context).unfocus();
-  // }
+  void _onScaffoldTap() {
+    FocusScope.of(context).unfocus();
+  }
 
   void _onSignInPressed() async {
     if (_email.isEmpty || _password.isEmpty) {
@@ -71,18 +71,12 @@ class LogInPageState extends ConsumerState<LogInPage> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Gap(50),
-            Text(
-              "English (US)",
-              style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                    color: Colors.grey.shade700,
-                  ),
-            ),
             const Gap(100),
             Container(
               padding: const EdgeInsets.symmetric(

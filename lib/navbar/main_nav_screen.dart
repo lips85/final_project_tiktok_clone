@@ -1,3 +1,4 @@
+import 'package:final_project_tiktok_clone/features/moods/views/post_screen.dart';
 import 'package:final_project_tiktok_clone/features/settings/views/settings_screen_tweet.dart';
 import 'package:final_project_tiktok_clone/navbar/widgets/nav_tap.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _MainNavScreenState extends ConsumerState<MainNavScreen> {
         children: [
           Offstage(
             offstage: _selectedIndex != 0,
-            child: const SettingsScreen(),
+            child: const PostScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 1,

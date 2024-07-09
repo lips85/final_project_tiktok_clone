@@ -1,6 +1,7 @@
 import 'package:final_project_tiktok_clone/features/authentication_tread/repos/authentication_repository.dart';
 import 'package:final_project_tiktok_clone/features/authentication_tread/views/create_account_page.dart';
 import 'package:final_project_tiktok_clone/features/authentication_tread/views/login_page.dart';
+import 'package:final_project_tiktok_clone/features/moods/views/post_screen.dart';
 import 'package:final_project_tiktok_clone/features/settings/views/settings_screen_tweet.dart';
 import 'package:final_project_tiktok_clone/navbar/main_nav_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,6 +35,11 @@ final routerProvider = Provider((ref) {
         name: MainNavScreen.routeName,
         path: MainNavScreen.routeURL,
         builder: (context, state) => const MainNavScreen(),
+      ),
+      GoRoute(
+        name: PostScreen.routeName,
+        path: PostScreen.routeURL,
+        builder: (context, state) => const PostScreen(),
       ),
       GoRoute(
         name: SettingsScreen.routeName,
