@@ -47,9 +47,9 @@ class LogInPageState extends ConsumerState<LogInPage> {
     super.dispose();
   }
 
-  void _onScaffoldTap() {
-    FocusScope.of(context).unfocus();
-  }
+  // void _onScaffoldTap() {
+  //   FocusScope.of(context).unfocus();
+  // }`
 
   void _onSignInPressed() async {
     if (_email.isEmpty || _password.isEmpty) {

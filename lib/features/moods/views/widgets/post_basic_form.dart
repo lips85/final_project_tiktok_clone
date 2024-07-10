@@ -1,10 +1,7 @@
 import 'package:animated_emoji/animated_emoji.dart';
 import 'package:final_project_tiktok_clone/features/moods/models/mood_model.dart';
-import 'package:final_project_tiktok_clone/features/settings/view_models/darkmode_config_vm.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
 class PostBasicForm extends ConsumerStatefulWidget {

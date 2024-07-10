@@ -15,6 +15,12 @@ class PostScreen extends ConsumerStatefulWidget {
 }
 
 class PostScreenState extends ConsumerState<PostScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void _deleteMood() {
+    // ref.read(moodProvider.notifier).deleteMood();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ref.watch(moodProvider).when(
@@ -45,8 +51,14 @@ class PostScreenState extends ConsumerState<PostScreen> {
                     itemCount: moods.length,
                     itemBuilder: (BuildContext context, int index) {
                       final mood = moods[index];
-                      return PostBasicForm(
-                        mood: mood,
+                      return Form(
+                        key: _formKey,
+                        child: GestureDetector(
+                          onLongPress: _deleteMood,
+                          child: PostBasicForm(
+                            mood: mood,
+                          ),
+                        ),
                       );
                     },
                   ),
