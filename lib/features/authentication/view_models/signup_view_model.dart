@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:final_project_tiktok_clone/features/authentication_tread/repos/authentication_repository.dart';
+import 'package:final_project_tiktok_clone/features/authentication/repos/authentication_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SignInViewModel extends AsyncNotifier<void> {
+class SignUpViewModel extends AsyncNotifier<void> {
   late final AuthenticationRepository _authRepo;
 
   @override
@@ -11,13 +11,13 @@ class SignInViewModel extends AsyncNotifier<void> {
     _authRepo = ref.read(authRepo);
   }
 
-  Future<void> signInWithEmailAndPassword({
+  Future<void> signUpWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
-      () async => await _authRepo.signInWithEmailAndPassword(
+      () async => await _authRepo.createUserWithEmailAndPassword(
         email: email,
         password: password,
       ),
@@ -25,6 +25,6 @@ class SignInViewModel extends AsyncNotifier<void> {
   }
 }
 
-final signInProvider = AsyncNotifierProvider<SignInViewModel, void>(
-  () => SignInViewModel(),
+final signUpProvider = AsyncNotifierProvider<SignUpViewModel, void>(
+  () => SignUpViewModel(),
 );

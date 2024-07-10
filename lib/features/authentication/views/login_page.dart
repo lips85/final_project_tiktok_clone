@@ -1,5 +1,5 @@
-import 'package:final_project_tiktok_clone/features/authentication_tread/view_models/signin_view_model.dart';
-import 'package:final_project_tiktok_clone/features/authentication_tread/views/create_account_page.dart';
+import 'package:final_project_tiktok_clone/features/authentication/view_models/signin_view_model.dart';
+import 'package:final_project_tiktok_clone/features/authentication/views/create_account_page.dart';
 import 'package:final_project_tiktok_clone/features/settings/view_models/darkmode_config_vm.dart';
 import 'package:final_project_tiktok_clone/navbar/main_nav_screen.dart';
 

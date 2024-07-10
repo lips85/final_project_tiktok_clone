@@ -1,6 +1,6 @@
-import 'package:final_project_tiktok_clone/features/authentication_tread/utils/common_button.dart';
-import 'package:final_project_tiktok_clone/features/authentication_tread/utils/validators.dart';
-import 'package:final_project_tiktok_clone/features/authentication_tread/view_models/signup_view_model.dart';
+import 'package:final_project_tiktok_clone/features/authentication/utils/common_button.dart';
+import 'package:final_project_tiktok_clone/features/authentication/utils/validators.dart';
+import 'package:final_project_tiktok_clone/features/authentication/view_models/signup_view_model.dart';
 import 'package:final_project_tiktok_clone/features/settings/view_models/darkmode_config_vm.dart';
 import 'package:final_project_tiktok_clone/navbar/main_nav_screen.dart';
 

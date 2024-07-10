@@ -1,4 +1,4 @@
-import 'package:final_project_tiktok_clone/features/authentication_tread/repos/authentication_repository.dart';
+import 'package:final_project_tiktok_clone/features/authentication/repos/authentication_repository.dart';
 import 'package:final_project_tiktok_clone/features/settings/view_models/darkmode_config_vm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
