@@ -14,12 +14,12 @@ class MoodViewModel extends AsyncNotifier<List<MoodModel>> {
             postTime: '12:00 PM',
             postDate: DateTime.now(),
           ),
-          // MoodModel(
-          //   mood: 'Happy',
-          //   postText: 'I am happy today',
-          //   postTime: '12:00 PM',
-          //   postDate: DateTime.now(),
-          // )
+          MoodModel(
+            mood: 'Sad',
+            postText: 'I am sad today',
+            postTime: '12:00 PM',
+            postDate: DateTime.now(),
+          )
         ];
 
   // void deleteMood() {
