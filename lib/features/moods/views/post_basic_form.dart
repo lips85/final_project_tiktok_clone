@@ -1,4 +1,4 @@
-import 'package:final_project_tiktok_clone/features/moods/models/animate_mood.dart';
+import 'package:final_project_tiktok_clone/core/const/animate_mood.dart';
 import 'package:final_project_tiktok_clone/features/moods/models/mood_post_model.dart';
 import 'package:final_project_tiktok_clone/features/moods/view_model/mood_view_model.dart';
 import 'package:flutter/material.dart';
@@ -15,17 +15,20 @@ class _PostBasicFormState extends ConsumerState<PostBasicForm> {
   final _formKey = GlobalKey<FormState>();
   String mood = moods.first; // Default to the first mood in the list
   String postText = '';
-  String postTime = '';
 
   void _addMoodPost() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+
+      DateTime now = DateTime.now();
+      String postTime = now.toIso8601String(); // Save the actual time
+
       MoodPost newPost = MoodPost(
         id: '',
         mood: mood,
         postText: postText,
         postTime: postTime,
-        postDate: DateTime.now(),
+        postDate: now,
       );
       await ref.read(moodPostViewModelProvider.notifier).addMoodPost(newPost);
       if (mounted) {
@@ -36,11 +39,11 @@ class _PostBasicFormState extends ConsumerState<PostBasicForm> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: size.height * 0.7,
       padding: const EdgeInsets.all(
-        16,
-      ), // To make sure the form fields are visible above the keyboard
+          20), // To make sure the form fields are visible above the keyboard
       child: Form(
         key: _formKey,
         child: Column(
@@ -65,12 +68,6 @@ class _PostBasicFormState extends ConsumerState<PostBasicForm> {
               decoration: const InputDecoration(labelText: 'Post Text'),
               onSaved: (value) {
                 postText = value!;
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Post Time'),
-              onSaved: (value) {
-                postTime = value!;
               },
             ),
             const SizedBox(height: 20),

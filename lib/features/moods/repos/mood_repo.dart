@@ -3,7 +3,7 @@ import 'package:final_project_tiktok_clone/features/moods/models/mood_post_model
 
 class MoodPostRepository {
   final CollectionReference collection =
-      FirebaseFirestore.instance.collection('moodPosts');
+      FirebaseFirestore.instance.collection("moodPosts");
 
   Future<void> addMoodPost(MoodPost moodPost) {
     return collection.add(moodPost.toMap());
@@ -14,7 +14,8 @@ class MoodPostRepository {
   }
 
   Stream<List<MoodPost>> getMoodPosts() {
-    return collection.snapshots().map((query) =>
-        query.docs.map((doc) => MoodPost.fromFirestore(doc)).toList());
+    return collection.orderBy("postDate", descending: true).snapshots().map(
+        (query) =>
+            query.docs.map((doc) => MoodPost.fromFirestore(doc)).toList());
   }
 }

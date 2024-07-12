@@ -1,43 +1,14 @@
 import 'package:animated_emoji/animated_emoji.dart';
-import 'package:final_project_tiktok_clone/features/moods/models/animate_mood.dart';
+import 'package:final_project_tiktok_clone/core/const/animate_mood.dart';
 import 'package:final_project_tiktok_clone/features/moods/view_model/mood_view_model.dart';
-import 'package:final_project_tiktok_clone/features/moods/views/post_basic_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class PostScreen extends ConsumerWidget {
   static String routeName = "moods";
   static String routeURL = "/moods";
   const PostScreen({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final moodPosts = ref.watch(moodPostViewModelProvider);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mood Posts'),
-      ),
-      body: ListView.builder(
-        itemCount: moodPosts.length,
-        itemBuilder: (context, index) {
-          final moodPost = moodPosts[index];
-          return ListTile(
-            leading: AnimatedEmoji(
-              animatedMood(moodPost.mood),
-              size: 32.0,
-            ),
-            title: Text(moodPost.mood),
-            subtitle: Text(moodPost.postText),
-            trailing: Text(moodPost.postTime),
-            onLongPress: () {
-              _showDeleteConfirmationDialog(context, ref, moodPost.id);
-            },
-          );
-        },
-      ),
-    );
-  }
 
   void _showDeleteConfirmationDialog(
       BuildContext context, WidgetRef ref, String postId) {
@@ -66,6 +37,37 @@ class PostScreen extends ConsumerWidget {
           ],
         );
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final moodPosts = ref.watch(moodPostViewModelProvider);
+    timeago.setLocaleMessages('ko', timeago.KoMessages());
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Mood Posts'),
+      ),
+      body: ListView.builder(
+        itemCount: moodPosts.length,
+        itemBuilder: (context, index) {
+          final moodPost = moodPosts[index];
+          final DateTime postDate = DateTime.parse(moodPost.postTime);
+          return ListTile(
+            leading: AnimatedEmoji(
+              animatedMood(moodPost.mood),
+              size: 32.0,
+            ),
+            title: Text(moodPost.mood),
+            subtitle: Text(moodPost.postText),
+            trailing: Text(timeago.format(postDate, locale: "ko")),
+            onLongPress: () {
+              _showDeleteConfirmationDialog(context, ref, moodPost.id);
+            },
+          );
+        },
+      ),
     );
   }
 }
