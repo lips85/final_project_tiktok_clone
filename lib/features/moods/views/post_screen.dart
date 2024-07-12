@@ -49,15 +49,10 @@ class PostScreenState extends ConsumerState<PostScreen> {
                     itemCount: moods.length,
                     itemBuilder: (BuildContext context, int index) {
                       final mood = moods[index];
-                      final GlobalKey<FormState> formKey =
-                          GlobalKey<FormState>();
-                      return Form(
-                        key: formKey,
-                        child: GestureDetector(
-                          onLongPress: _deleteMood,
-                          child: PostBasicForm(
-                            mood: mood,
-                          ),
+                      return GestureDetector(
+                        onLongPress: _deleteMood,
+                        child: PostBasicForm(
+                          mood: mood,
                         ),
                       );
                     },

@@ -30,7 +30,7 @@ class PostBasicFormState extends ConsumerState<PostBasicForm> {
       padding: const EdgeInsets.only(top: 10),
       child: ListTile(
         leading: AnimatedEmoji(
-          animatedMood[widget.mood.mood]!,
+          animatedMood(widget.mood.mood),
           size: 50,
         ),
         title: Text(

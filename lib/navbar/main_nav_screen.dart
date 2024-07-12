@@ -1,5 +1,7 @@
+import 'package:final_project_tiktok_clone/features/charts/views/chart_screen.dart';
 import 'package:final_project_tiktok_clone/features/moods/views/post_screen.dart';
 import 'package:final_project_tiktok_clone/features/settings/views/settings_screen_tweet.dart';
+import 'package:final_project_tiktok_clone/features/writes/views/write_screen.dart';
 import 'package:final_project_tiktok_clone/navbar/widgets/nav_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,7 +30,7 @@ class _MainNavScreenState extends ConsumerState<MainNavScreen> {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      builder: (context) => const Scaffold(),
+      builder: (context) => const WriteScreen(),
     );
 
     setState(() {
@@ -38,9 +40,8 @@ class _MainNavScreenState extends ConsumerState<MainNavScreen> {
 
   final List screens = [
     "Home",
-    "Search",
     "Post",
-    "Favorite",
+    "Chart",
     "Profile",
   ];
 
@@ -55,15 +56,11 @@ class _MainNavScreenState extends ConsumerState<MainNavScreen> {
             child: const PostScreen(),
           ),
           Offstage(
-            offstage: _selectedIndex != 1,
-            child: const SettingsScreen(),
+            offstage: _selectedIndex != 2,
+            child: const ChartScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 3,
-            child: const SettingsScreen(),
-          ),
-          Offstage(
-            offstage: _selectedIndex != 4,
             child: const SettingsScreen(),
           ),
         ],
@@ -77,12 +74,6 @@ class _MainNavScreenState extends ConsumerState<MainNavScreen> {
               selectedIcon: FontAwesomeIcons.house,
               isSelected: _selectedIndex == 0,
               onTap: () => _onTap(0),
-            ),
-            NavTap(
-              icon: FontAwesomeIcons.magnifyingGlass,
-              selectedIcon: FontAwesomeIcons.magnifyingGlass,
-              isSelected: _selectedIndex == 1,
-              onTap: () => _onTap(1),
             ),
             Expanded(
               child: GestureDetector(
@@ -104,16 +95,16 @@ class _MainNavScreenState extends ConsumerState<MainNavScreen> {
               ),
             ),
             NavTap(
-              icon: FontAwesomeIcons.heart,
-              selectedIcon: FontAwesomeIcons.solidHeart,
-              isSelected: _selectedIndex == 3,
-              onTap: () => _onTap(3),
+              icon: FontAwesomeIcons.chartPie,
+              selectedIcon: FontAwesomeIcons.chartPie,
+              isSelected: _selectedIndex == 2,
+              onTap: () => _onTap(2),
             ),
             NavTap(
               icon: FontAwesomeIcons.user,
               selectedIcon: FontAwesomeIcons.solidUser,
-              isSelected: _selectedIndex == 4,
-              onTap: () => _onTap(4),
+              isSelected: _selectedIndex == 3,
+              onTap: () => _onTap(3),
             ),
           ],
         ),
