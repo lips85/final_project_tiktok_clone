@@ -1,66 +1,71 @@
+import 'package:animated_emoji/animated_emoji.dart';
+import 'package:final_project_tiktok_clone/features/moods/models/animate_mood.dart';
 import 'package:final_project_tiktok_clone/features/moods/view_model/mood_view_model.dart';
-import 'package:final_project_tiktok_clone/features/moods/views/widgets/post_basic_form.dart';
+import 'package:final_project_tiktok_clone/features/moods/views/post_basic_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
 
-class PostScreen extends ConsumerStatefulWidget {
-  static String routeName = "Main";
-  static String routeURL = "/main";
-
+class PostScreen extends ConsumerWidget {
+  static String routeName = "moods";
+  static String routeURL = "/moods";
   const PostScreen({super.key});
 
   @override
-  PostScreenState createState() => PostScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final moodPosts = ref.watch(moodPostViewModelProvider);
 
-class PostScreenState extends ConsumerState<PostScreen> {
-  void _deleteMood() {
-    // ref.read(moodProvider.notifier).deleteMood();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Mood Posts'),
+      ),
+      body: ListView.builder(
+        itemCount: moodPosts.length,
+        itemBuilder: (context, index) {
+          final moodPost = moodPosts[index];
+          return ListTile(
+            leading: AnimatedEmoji(
+              animatedMood(moodPost.mood),
+              size: 32.0,
+            ),
+            title: Text(moodPost.mood),
+            subtitle: Text(moodPost.postText),
+            trailing: Text(moodPost.postTime),
+            onLongPress: () {
+              _showDeleteConfirmationDialog(context, ref, moodPost.id);
+            },
+          );
+        },
+      ),
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return ref.watch(moodProvider).when(
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          error: (error, stack) => Center(
-            child: Text(
-              'Error: $error',
-              style: const TextStyle(color: Colors.red),
+  void _showDeleteConfirmationDialog(
+      BuildContext context, WidgetRef ref, String postId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Post'),
+          content: const Text('Are you sure you want to delete this post?'),
+          actions: [
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
-          ),
-          data: (moods) => SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const Gap(20),
-                  Center(
-                    child: Text(
-                      "Mood",
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
-                  const Gap(20),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: moods.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final mood = moods[index];
-                      return GestureDetector(
-                        onLongPress: _deleteMood,
-                        child: PostBasicForm(
-                          mood: mood,
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+            TextButton(
+              child: const Text('Delete'),
+              onPressed: () {
+                ref
+                    .read(moodPostViewModelProvider.notifier)
+                    .deleteMoodPost(postId);
+                Navigator.of(context).pop();
+              },
             ),
-          ),
+          ],
         );
+      },
+    );
   }
 }

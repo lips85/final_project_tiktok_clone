@@ -1,7 +1,8 @@
 import 'package:final_project_tiktok_clone/features/charts/views/chart_screen.dart';
 import 'package:final_project_tiktok_clone/features/moods/views/post_screen.dart';
+import 'package:final_project_tiktok_clone/features/moods/views/post_basic_form.dart';
 import 'package:final_project_tiktok_clone/features/settings/views/settings_screen_tweet.dart';
-import 'package:final_project_tiktok_clone/features/writes/views/write_screen.dart';
+
 import 'package:final_project_tiktok_clone/navbar/widgets/nav_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +31,7 @@ class _MainNavScreenState extends ConsumerState<MainNavScreen> {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      builder: (context) => const WriteScreen(),
+      builder: (context) => const PostBasicForm(),
     );
 
     setState(() {

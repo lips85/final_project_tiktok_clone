@@ -13,7 +13,7 @@ final Map<String, AnimatedEmojiData> moodData = {
   "InLove": AnimatedEmojis.heartFace,
 };
 
-final List moods = [
+final List<String> moods = [
   "Happy",
   "Excited",
   "Grateful",
