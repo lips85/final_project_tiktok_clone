@@ -39,7 +39,7 @@ final routerProvider = Provider((ref) {
       GoRoute(
         name: PostScreen.routeName,
         path: PostScreen.routeURL,
-        builder: (context, state) => PostScreen(),
+        builder: (context, state) => const PostScreen(),
       ),
       GoRoute(
         name: SettingsScreen.routeName,

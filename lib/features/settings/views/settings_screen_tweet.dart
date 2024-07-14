@@ -32,36 +32,6 @@ class SettingsScreen extends ConsumerWidget {
                 ? const Text('Dark Mode (ON)')
                 : const Text('Dark Mode (OFF)'),
           ),
-          SettingListTile(
-            icon: Icons.person_add,
-            text: "Follow and invite friends",
-            ontap: () {},
-          ),
-          SettingListTile(
-            icon: Icons.notifications,
-            text: "Notifications",
-            ontap: () {},
-          ),
-          SettingListTile(
-            icon: Icons.lock,
-            text: "Privacy",
-            ontap: () {},
-          ),
-          SettingListTile(
-            icon: Icons.person,
-            text: "Account",
-            ontap: () {},
-          ),
-          SettingListTile(
-            icon: Icons.help,
-            text: "Help",
-            ontap: () {},
-          ),
-          SettingListTile(
-            icon: Icons.info,
-            text: "About",
-            ontap: () {},
-          ),
           const Divider(),
           ListTile(
             title: const Text(

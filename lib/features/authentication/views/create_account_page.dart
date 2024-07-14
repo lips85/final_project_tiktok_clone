@@ -1,12 +1,11 @@
 import 'package:final_project_tiktok_clone/features/authentication/utils/common_button.dart';
 import 'package:final_project_tiktok_clone/features/authentication/utils/validators.dart';
 import 'package:final_project_tiktok_clone/features/authentication/view_models/signup_view_model.dart';
-import 'package:final_project_tiktok_clone/features/settings/view_models/darkmode_config_vm.dart';
 import 'package:final_project_tiktok_clone/navbar/main_nav_screen.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
@@ -95,8 +94,6 @@ class CreateAccountPageState extends ConsumerState<CreateAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return GestureDetector(
       onTap: _onScaffoldTap,
       child: Scaffold(
@@ -106,35 +103,24 @@ class CreateAccountPageState extends ConsumerState<CreateAccountPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Gap(50),
+              const Gap(200),
               Text(
-                "English (US)",
-                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                "Mood Tracker",
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Colors.grey.shade700,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 60,
                     ),
+              ).animate(onPlay: (controller) => controller.repeat()).shimmer(
+                duration: 3.seconds,
+                colors: [
+                  const Color(0xFFFF9500),
+                  Colors.white,
+                  Colors.white,
+                  const Color(0xFFFF9500),
+                ],
               ),
               const Gap(100),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
-                ),
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: ref.watch(darkModeConfigProvider).isDarkMode
-                      ? Colors.white
-                      : Colors.black,
-                ),
-                child: FaIcon(
-                  FontAwesomeIcons.threads,
-                  size: size.width * 0.14,
-                  color: ref.watch(darkModeConfigProvider).isDarkMode
-                      ? Colors.black
-                      : Colors.white,
-                ),
-              ),
-              const Gap(120),
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -243,23 +229,31 @@ class CreateAccountPageState extends ConsumerState<CreateAccountPage> {
               const Gap(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  FaIcon(
-                    FontAwesomeIcons.meta,
-                    size: 18,
-                    color: Colors.grey.shade700,
+                  SvgPicture.asset(
+                    "assets/images/nomad.svg",
+                    width: 30,
                   ),
                   const Gap(5),
                   Text(
-                    "Meta",
+                    "Nomad Coder",
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: Colors.grey.shade700,
-                        ),
+                        color: Colors.grey.shade700,
+                        fontWeight: FontWeight.w800),
+                  )
+                      .animate(onPlay: (controller) => controller.repeat())
+                      .shimmer(
+                    duration: 3.seconds,
+                    colors: [
+                      const Color(0xFFFF9500),
+                      Colors.white,
+                      Colors.white,
+                      const Color(0xFFFF9500),
+                    ],
                   ),
                 ],
               ),
-              const Gap(20),
+              const Gap(50),
             ],
           ),
         ),
